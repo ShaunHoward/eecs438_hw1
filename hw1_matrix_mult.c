@@ -3,7 +3,7 @@
 EECS 438, HW1
 
 Run either a standard row-major order or row-major order for m_one and column-major order for m_two matrix multiplication.
-It starts with a square matrix of N=1000 and increases each dimension by 100 over 10 loops.
+It starts with a square matrix of N=1500 and increases each dimension by 100 over 10 loops.
 Matrices contain generated double-precision floating point numbers.
 The first and only argument is either 1 for row major or 0 for mixed row/column major.
 
@@ -118,7 +118,7 @@ int main(int argc, char *argv[]){
 	The first and only argument is either 1 for row major or 0 for mixed row/column major.
 	*/
 	int main_loop_counter = 0;
-	int starting_matrix_size = 1000;
+	int starting_matrix_size = 1500;
 	int mat_size_incr = 100;
 	int n_loops = 10;
 	int i, j;
