@@ -79,8 +79,9 @@ void mat_mul(double* m_one, double* m_two, double* m_product, bool row_major, in
 		    for(j = 0; j < n_cols_two; j++){
 		    	// initialize product value at i,j to 0.0
 		    	m_product[i*n_cols_two+j] = 0.0;
+		    	double *col = &m_two[j*n_rows_two];
    				for(k = 0; k < n_rows_two; k++){
-					m_product[i*n_cols_two+j] += m_one[i*n_cols_one+k] * m_two[j*n_rows_two+k];
+					m_product[i*n_cols_two+j] += m_one[i*n_cols_one+k] * col[k];
 				} 
 		    }
 		}
@@ -118,7 +119,7 @@ int main(int argc, char *argv[]){
 	The first and only argument is either 1 for row major or 0 for mixed row/column major.
 	*/
 	int main_loop_counter = 0;
-	int starting_matrix_size = 2200;
+	int starting_matrix_size = 2000;
 	int mat_size_incr = 100;
 	int n_loops = 10;
 	int i, j;
