@@ -1,12 +1,12 @@
 square matrix size 2000 to 2900
 
-Matrix multiplication of matrices took 8.62000 seconds.
-Matrix multiplication of matrices took 11.61000 seconds.
-Matrix multiplication of matrices took 14.82000 seconds.
-Matrix multiplication of matrices took 19.61000 seconds.
-Matrix multiplication of matrices took 24.76000 seconds.
-Matrix multiplication of matrices took 30.74000 seconds.
-Matrix multiplication of matrices took 40.33000 seconds.
-Matrix multiplication of matrices took 45.94000 seconds.
-Matrix multiplication of matrices took 55.80000 seconds.
-Matrix multiplication of matrices took 67.02000 seconds.
+Matrix multiplication of matrices took 5.32000 seconds.
+Matrix multiplication of matrices took 6.34000 seconds.
+Matrix multiplication of matrices took 7.35000 seconds.
+Matrix multiplication of matrices took 8.52000 seconds.
+Matrix multiplication of matrices took 9.63000 seconds.
+Matrix multiplication of matrices took 10.99000 seconds.
+Matrix multiplication of matrices took 12.27000 seconds.
+Matrix multiplication of matrices took 13.87000 seconds.
+Matrix multiplication of matrices took 15.32000 seconds.
+Matrix multiplication of matrices took 17.16000 seconds.
