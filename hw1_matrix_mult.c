@@ -20,7 +20,7 @@ typedef int bool;
 #define true 1
 #define false 0
 
-bool PRINT_OUTPUTS = true;
+bool PRINT_OUTPUTS = false;
 
 
 void mat_mul(double* m_one, double* m_two, double* m_product, bool row_major, int n_rows_one,
