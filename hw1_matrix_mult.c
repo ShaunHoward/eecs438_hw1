@@ -20,7 +20,7 @@ typedef int bool;
 #define true 1
 #define false 0
 
-bool PRINT_OUTPUTS = false;
+bool PRINT_OUTPUTS = true;
 
 
 void mat_mul(double* m_one, double* m_two, double* m_product, bool row_major, int n_rows_one,
@@ -79,9 +79,9 @@ void mat_mul(double* m_one, double* m_two, double* m_product, bool row_major, in
 		    for(j = 0; j < n_cols_two; j++){
 		    	// initialize product value at i,j to 0.0
 		    	m_product[i*n_cols_two+j] = 0.0;
-		    	double *col = &m_two[j*n_rows_two];
+		    	//double *col = &m_two[j*n_rows_two];
    				for(k = 0; k < n_rows_two; k++){
-					m_product[i*n_cols_two+j] += m_one[i*n_cols_one+k] * col[k];
+					m_product[i*n_cols_two+j] += m_one[i*n_cols_one+k] * m_two[j*n_rows_two+k];
 				} 
 		    }
 		}
@@ -136,24 +136,32 @@ int main(int argc, char *argv[]){
 	    // multiply all matrices in chosen order and time MM operations
 	    // increase the matrix size by mat_size_incr after each loop
 
-	    // create curr_mat_size x curr_mat_size matrix arrays
-		double* m_one = malloc(sizeof(double) * curr_mat_size * curr_mat_size);
-		double* m_two = malloc(sizeof(double) * curr_mat_size * curr_mat_size);
-		double* m_product = malloc(sizeof(double) * curr_mat_size * curr_mat_size);
-
-		// initialize arrays with somewhat random, but predictable values
-		for(i=0; i<curr_mat_size;i++)
-			for(j=0; j<curr_mat_size;j++)
-                m_one[i*curr_mat_size+j]=i+j;
-
-        // use same initialization as for m_one, but add one to each value
-		for(i=0; i<curr_mat_size;i++)
-			for(j=0; j<curr_mat_size;j++)
-                m_two[i*curr_mat_size+j]=i+j+1;
-
-		// store matrix sizes
+     	// store matrix sizes
 		int n_rows_one = curr_mat_size, n_cols_one = curr_mat_size;
 		int n_rows_two = curr_mat_size, n_cols_two = curr_mat_size;
+
+	    // create curr_mat_size x curr_mat_size matrix arrays
+		double* m_one = malloc(sizeof(double) * n_rows_one * n_cols_one);
+		double* m_two = malloc(sizeof(double) * n_rows_two * n_cols_two);
+		double* m_product = malloc(sizeof(double) * n_rows_one * n_cols_two);
+
+		// initialize arrays with somewhat random, but predictable values
+		for(i=0; i<n_rows_one;i++)
+			for(j=0; j<n_cols_one; j++)
+                m_one[i*n_cols_one+j]=i+j;
+
+
+        if (row_major == true) {
+            // initialize arrays with somewhat random, but predictable values
+			for(i=0; i<n_rows_two;i++)
+				for(j=0; j<n_cols_two;j++)
+	                m_two[i*n_cols_two+j]=i+j+1;
+	    } else {
+	        // use same initialization as for m_one, but add one to each value
+			for(j=0; j<n_cols_two;j++)
+				for(i=0; i<n_rows_two;i++)
+	                m_two[j*n_rows_two+i]=i+j+1;
+	    }
 
 		// compute matrix multiplication
 		mat_mul(m_one, m_two, m_product, row_major, n_rows_one, n_cols_one, n_rows_two, n_cols_two);
