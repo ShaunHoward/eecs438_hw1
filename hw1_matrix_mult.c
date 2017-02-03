@@ -3,7 +3,7 @@
 EECS 438, HW1
 
 Run either a standard row-major order or row-major order for m_one and column-major order for m_two matrix multiplication.
-It starts with a square matrix of N=2200 and increases each dimension by 100 over 10 loops.
+It starts with a square matrix of N=2000 and increases each dimension by 100 over 10 loops.
 Matrices contain generated double-precision floating point numbers.
 The first and only argument is either 1 for row major or 0 for mixed row/column major.
 
@@ -79,9 +79,10 @@ void mat_mul(double* m_one, double* m_two, double* m_product, bool row_major, in
 		    for(j = 0; j < n_cols_two; j++){
 		    	// initialize product value at i,j to 0.0
 		    	m_product[i*n_cols_two+j] = 0.0;
-		    	//double *col = &m_two[j*n_rows_two];
+		    	double *col = &m_two[j*n_rows_two];
    				for(k = 0; k < n_rows_two; k++){
-					m_product[i*n_cols_two+j] += m_one[i*n_cols_one+k] * m_two[j*n_rows_two+k];
+					m_product[i*n_cols_two+j] += m_one[i*n_cols_one+k] * col[k];
+					//m_product[i*n_cols_two+j] += m_one[i*n_cols_one+k] * m_two[j*n_rows_two+k];
 				} 
 		    }
 		}
@@ -114,7 +115,7 @@ void mat_mul(double* m_one, double* m_two, double* m_product, bool row_major, in
 int main(int argc, char *argv[]){
 	/*
 	Run either a standard row-major order or row-major order for m_one and column-major order for m_two matrix multiplication.
-	It starts with a square matrix of N=2500 and increases each dimension by 100 over 10 loops.
+	It starts with a square matrix of N=2000 and increases each dimension by 100 over 10 loops.
 	Matrices contain generated double-precision floating point numbers.
 	The first and only argument is either 1 for row major or 0 for mixed row/column major.
 	*/
@@ -152,12 +153,12 @@ int main(int argc, char *argv[]){
 
 
         if (row_major == true) {
-            // initialize arrays with somewhat random, but predictable values
+	        // use same initialization as for m_one, but add one to each value, in row major order
 			for(i=0; i<n_rows_two;i++)
 				for(j=0; j<n_cols_two;j++)
 	                m_two[i*n_cols_two+j]=i+j+1;
 	    } else {
-	        // use same initialization as for m_one, but add one to each value
+	        // use same initialization as for m_one, but add one to each value, in column-major order
 			for(j=0; j<n_cols_two;j++)
 				for(i=0; i<n_rows_two;i++)
 	                m_two[j*n_rows_two+i]=i+j+1;
